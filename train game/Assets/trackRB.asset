@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: trackBR
+  m_Name: trackRB
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 4fa898d5abf4ea843be9c9c63b406921, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -31,6 +31,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 8866005073010239519, guid: 7e586461ddabb10469e6935492c9b3da,
+    type: 3}
   m_Flags: 1
   m_ColliderType: 1

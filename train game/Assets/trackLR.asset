@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: trackHoriz
+  m_Name: trackLR
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 62f8cb15e7876504cbe8ae77fe64ddb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -31,6 +31,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 6105220291166869313, guid: b84e64b447f85f646854de009f9eb68a,
+    type: 3}
   m_Flags: 1
   m_ColliderType: 1

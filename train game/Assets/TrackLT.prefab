@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4964520423329835623}
   - component: {fileID: 7722098951383214985}
+  - component: {fileID: -6482172795699228416}
   m_Layer: 0
   m_Name: TrackLT
   m_TagString: Untagged
@@ -57,3 +58,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-6482172795699228416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440440803513170224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a79a5477012304e8e326448465e705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

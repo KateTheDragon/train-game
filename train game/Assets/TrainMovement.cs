@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrainMovement : MonoBehaviour
 {
-    float speed = 0.02f;
+    float speed = 0.01f;
     enum Direction {
         Up,
         Down,
@@ -61,7 +61,6 @@ public class TrainMovement : MonoBehaviour
     {
         string name = col.name;
         tile = col.gameObject.transform.position;
-        Debug.Log(tile);
         Direction a = going;
         Direction b = going;
         if (name.Contains("LR")) {
