@@ -52,7 +52,7 @@ public class TrainMovement : MonoBehaviour
             if (derailed)
             {
                 Debug.Log("Derailed");
-                crash();
+                StartCoroutine(crash());
             }
         } else
         {
@@ -127,12 +127,12 @@ public class TrainMovement : MonoBehaviour
         if (name.Contains("Obstacle"))
         {
             Debug.Log("Obstacle");
-            crash();
+            StartCoroutine(crash());
         }
         else if (name.Contains("Station"))
         {
             win();
-        } else if (name.Contains("Track"))
+        } else
         {
             if (name.Contains("LR"))
             {
@@ -164,8 +164,7 @@ public class TrainMovement : MonoBehaviour
                 a = Direction.Up;
                 b = Direction.Down;
             }
-            else
-          if (going == inverse(a))
+            if (going == inverse(a))
             {
                 toGo = b;
             }
@@ -176,7 +175,7 @@ public class TrainMovement : MonoBehaviour
             else
             {
                 Debug.Log("Wrong direction at " + name);
-                crash();
+                StartCoroutine(crash());
             }
         }
     }
@@ -195,13 +194,14 @@ public class TrainMovement : MonoBehaviour
         return Direction.Right;
     }         
     
-    void crash()
+    IEnumerator crash()
     {
         going = Direction.Stop;
         toGo = Direction.Stop;
-        //TODO: Crash animation
+
         gameObject.GetComponent<Animator>().Play("Crash");
 
+        yield return new WaitForSeconds(1);
 
         SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
     }

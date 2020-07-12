@@ -7745,6 +7745,7 @@ GameObject:
   - component: {fileID: 1855892785}
   - component: {fileID: 1855892788}
   - component: {fileID: 1855892789}
+  - component: {fileID: 1855892790}
   m_Layer: 0
   m_Name: Train
   m_TagString: Untagged
@@ -7877,6 +7878,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1855892790
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855892784}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 782ebd9b3ed5476479e4047375da5fae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1913305585
 MonoBehaviour:
   m_ObjectHideFlags: 0
