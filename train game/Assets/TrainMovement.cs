@@ -9,7 +9,8 @@ public class TrainMovement : MonoBehaviour
         Up,
         Down,
         Left,
-        Right
+        Right,
+        Stop
     }
     Direction going = Direction.Right;
     Direction toGo = Direction.Right;
@@ -44,6 +45,8 @@ public class TrainMovement : MonoBehaviour
             case Direction.Right:
                 transform.eulerAngles = new Vector3 (0, 0, 0);
                 transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
+                break;
+            case Direction.Stop:
                 break;
         }
         
@@ -81,32 +84,43 @@ public class TrainMovement : MonoBehaviour
         } else if (name.Contains("TB")) {
             a = Direction.Up;
             b = Direction.Down;
+        } else if (name.Contains("Obstacle"))
+        {
+            crash();
         }
-        //TODO: crash if obstacle
-        if (going == inverse(a)) {
+        if (going == inverse(a))
+        {
             toGo = b;
-        } else {
-            toGo = a;
-            //TODO: crash if track is wrong direction
-            //TODO: crash if train derails
         }
+        else if (going == inverse(b))
+        {
+            toGo = a;
+        } else
+        {
+            crash();
+        }
+            //TODO: crash if train derails
     }
 
     Direction inverse (Direction d) {
         switch (d) {
             case Direction.Up:
                 return Direction.Down;
-                break;
             case Direction.Down:
                 return Direction.Up;
-                break;
             case Direction.Left:
                 return Direction.Right;
-                break;
             case Direction.Right:
                 return Direction.Left;
-                break;
             }
         return Direction.Right;
-    }                                   
+    }         
+    
+    void crash()
+    {
+        going = Direction.Stop;
+        toGo = Direction.Stop;
+        //TODO: ending dialogue
+        //TODO: Crash animation
+    }
 }
