@@ -6915,6 +6915,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 792d1711ca30d1b46bb61cdcd6e303ee, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: a82939bacaaa57b4cb2c1e4118f47a03, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -6963,11 +6965,13 @@ Tilemap:
     m_Data: {r: 0.7931542, g: 0.47698087, b: 0.5783185, a: 1}
   - m_RefCount: 1
     m_Data: {r: 0.9062676, g: 0.5428317, b: 0.6476153, a: 1}
-  m_TileObjectToInstantiateArray: []
+  m_TileObjectToInstantiateArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: -6, z: 0}
-  m_Size: {x: 9, y: 12, z: 1}
+  m_Origin: {x: -6, y: -6, z: 0}
+  m_Size: {x: 15, y: 12, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -7760,6 +7764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b0d12455d00724eb80314598fd620c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crashSprite: {fileID: 21300000, guid: 84daa2bba5e95a84da1b1a13d13f8268, type: 3}
 --- !u!212 &1855892786
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class TrainMovement : MonoBehaviour
     }
     Direction going = Direction.Right;
     Direction toGo = Direction.Right;
+    public Sprite crashSprite;
 
     Vector3 prevPos = new Vector3(-10, 0.5f, -1);
     Vector3 tile = new Vector3(0, 0, 0);
@@ -33,12 +34,15 @@ public class TrainMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO: fix this
         if(gotOn)
         {
             bool derailed = true;
             foreach (GameObject go in onRails)
             {
+                if (go.name.Contains("Station"))
+                {
+                    win();
+                }
                 if (go.name.Contains("Track"))
                 {
                     derailed = false;
@@ -47,6 +51,7 @@ public class TrainMovement : MonoBehaviour
             }
             if (derailed)
             {
+                Debug.Log("Derailed");
                 crash();
             }
         } else
@@ -102,7 +107,6 @@ public class TrainMovement : MonoBehaviour
         GameObject go = col.gameObject;
         if (onRails.Contains(go))
         {
-            Debug.Log("Remove: " + go.name);
             onRails.Remove(go);
         }
     }
@@ -113,7 +117,6 @@ public class TrainMovement : MonoBehaviour
         GameObject go = col.gameObject;
         if (!onRails.Contains(go))
         {
-            Debug.Log("Add: " + go.name);
             onRails.Add(go);
         }
 
@@ -121,44 +124,60 @@ public class TrainMovement : MonoBehaviour
         tile = col.gameObject.transform.position;
         Direction a = going;
         Direction b = inverse(going);
-        if (name.Contains("LR")) {
-            a = Direction.Left;
-            b = Direction.Right;
-        } else if (name.Contains("LT")) {
-            a = Direction.Left;
-            b = Direction.Up;
-        } else if (name.Contains("LB")) {
-            a = Direction.Left;
-            b = Direction.Down;
-        } else if (name.Contains("RT")) {
-            a = Direction.Right;
-            b = Direction.Up;
-        } else if (name.Contains("RB")) {
-            a = Direction.Right;
-            b = Direction.Down;
-        } else if (name.Contains("TB")) {
-            a = Direction.Up;
-            b = Direction.Down;
-        } else if (name.Contains("Obstacle"))
+        if (name.Contains("Obstacle"))
         {
+            Debug.Log("Obstacle");
             crash();
-        } else if (name.Contains("Station"))
+        }
+        else if (name.Contains("Station"))
         {
-            if (going == Direction.Right)
+            win();
+        } else if (name.Contains("Track"))
+        {
+            if (name.Contains("LR"))
             {
-                win();
+                a = Direction.Left;
+                b = Direction.Right;
             }
-        }
-        if (going == inverse(a))
-        {
-            toGo = b;
-        }
-        else if (going == inverse(b))
-        {
-            toGo = a;
-        } else
-        {
-            crash();
+            else if (name.Contains("LT"))
+            {
+                a = Direction.Left;
+                b = Direction.Up;
+            }
+            else if (name.Contains("LB"))
+            {
+                a = Direction.Left;
+                b = Direction.Down;
+            }
+            else if (name.Contains("RT"))
+            {
+                a = Direction.Right;
+                b = Direction.Up;
+            }
+            else if (name.Contains("RB"))
+            {
+                a = Direction.Right;
+                b = Direction.Down;
+            }
+            else if (name.Contains("TB"))
+            {
+                a = Direction.Up;
+                b = Direction.Down;
+            }
+            else
+          if (going == inverse(a))
+            {
+                toGo = b;
+            }
+            else if (going == inverse(b))
+            {
+                toGo = a;
+            }
+            else
+            {
+                Debug.Log("Wrong direction at " + name);
+                crash();
+            }
         }
     }
 
@@ -181,6 +200,8 @@ public class TrainMovement : MonoBehaviour
         going = Direction.Stop;
         toGo = Direction.Stop;
         //TODO: Crash animation
+        gameObject.GetComponent<Animator>().Play("Crash");
+
 
         SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
     }
