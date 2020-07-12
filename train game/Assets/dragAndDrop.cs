@@ -10,10 +10,13 @@ public class dragAndDrop : MonoBehaviour
     TileBase tile;
     private Vector3Int previous;
 
+    //TODO: figure out how not to overwrite things
+
     private void Start()
     {
         map = gameObject.GetComponentInParent<Tilemap>();
-        tile = map.GetTile(map.WorldToCell(transform.position));
+        previous = map.WorldToCell(transform.position);
+        tile = map.GetTile(previous);
         if (map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)) == map.WorldToCell(transform.position) && Input.GetMouseButton(0))
         {
             isDragging = true;
@@ -32,11 +35,13 @@ public class dragAndDrop : MonoBehaviour
 
     void Update()
     {
+        if (isDragging && !Input.GetMouseButton(0))
+        {
+            isDragging = false;
+        }
         if (isDragging && Input.GetMouseButton(0)) {
             // get current grid location
             Vector3Int currentCell = map.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            Debug.Log("Prev:" + previous);
-            Debug.Log("Current" + currentCell);
 
             // if the position has changed
             if (currentCell != previous)

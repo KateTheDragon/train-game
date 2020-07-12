@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrainMovement : MonoBehaviour
 {
-    float speed = 0.01f;
+    float speed = 0.005f;
     enum Direction {
         Up,
         Down,
