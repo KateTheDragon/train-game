@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TrainMovement : MonoBehaviour
 {
@@ -120,7 +121,8 @@ public class TrainMovement : MonoBehaviour
     {
         going = Direction.Stop;
         toGo = Direction.Stop;
-        //TODO: ending dialogue
         //TODO: Crash animation
+
+        SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
     }
 }
