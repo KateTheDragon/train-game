@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TrainMovement : MonoBehaviour
 {
-    float speed = 0.005f;
+    float speed = 0.003f;
     enum Direction {
         Up,
         Down,
@@ -16,7 +16,7 @@ public class TrainMovement : MonoBehaviour
     Direction going = Direction.Right;
     Direction toGo = Direction.Right;
 
-    Vector3 prevPos = new Vector3(-10, 0.5f, 1);
+    Vector3 prevPos = new Vector3(-10, 0.5f, -1);
     Vector3 tile = new Vector3(0, 0, 0);
 
     private List<GameObject> onRails = new List<GameObject>();
@@ -26,14 +26,14 @@ public class TrainMovement : MonoBehaviour
     void Start()
     {
         going = Direction.Right;
-        transform.position = new Vector3(-10, 0.5f, 1);
+        transform.position = new Vector3(-10, 0.5f, -1);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        /* TODO: fix this
+        //TODO: fix this
         if(gotOn)
         {
             bool derailed = true;
@@ -53,9 +53,16 @@ public class TrainMovement : MonoBehaviour
         {
             if (onRails.Count > 0)
             {
-                gotOn = true;
+                foreach (GameObject go in onRails)
+                {
+                    if (go.name.Contains("Track"))
+                    {
+                        gotOn = true;
+                        break;
+                    }
+                }
             }
-        }*/
+        }
         
 
         switch (going) {
@@ -89,12 +96,13 @@ public class TrainMovement : MonoBehaviour
         prevPos = transform.position;
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    void OnTriggerExit2D(Collider2D col)
     {
         //To keep track of whether the train is in contact with any rails
         GameObject go = col.gameObject;
-        if (!onRails.Contains(go))
+        if (onRails.Contains(go))
         {
+            Debug.Log("Remove: " + go.name);
             onRails.Remove(go);
         }
     }
@@ -105,6 +113,7 @@ public class TrainMovement : MonoBehaviour
         GameObject go = col.gameObject;
         if (!onRails.Contains(go))
         {
+            Debug.Log("Add: " + go.name);
             onRails.Add(go);
         }
 
