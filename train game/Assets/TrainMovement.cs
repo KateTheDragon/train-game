@@ -16,20 +16,48 @@ public class TrainMovement : MonoBehaviour
     Direction going = Direction.Right;
     Direction toGo = Direction.Right;
 
-    Vector3 prevPos = new Vector3(-10, 0.5f, 0);
+    Vector3 prevPos = new Vector3(-10, 0.5f, 1);
     Vector3 tile = new Vector3(0, 0, 0);
+
+    private List<GameObject> onRails = new List<GameObject>();
+    private bool gotOn = false;
 
     // Start is called before the first frame update
     void Start()
     {
         going = Direction.Right;
-        transform.position = new Vector3(-10, 0.5f, 0);
+        transform.position = new Vector3(-10, 0.5f, 1);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        /* TODO: fix this
+        if(gotOn)
+        {
+            bool derailed = true;
+            foreach (GameObject go in onRails)
+            {
+                if (go.name.Contains("Track"))
+                {
+                    derailed = false;
+                    break;
+                }
+            }
+            if (derailed)
+            {
+                crash();
+            }
+        } else
+        {
+            if (onRails.Count > 0)
+            {
+                gotOn = true;
+            }
+        }*/
+        
+
         switch (going) {
             case Direction.Up:
                 transform.eulerAngles = new Vector3 (0, 0, 90);
@@ -61,12 +89,29 @@ public class TrainMovement : MonoBehaviour
         prevPos = transform.position;
     }
 
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        //To keep track of whether the train is in contact with any rails
+        GameObject go = col.gameObject;
+        if (!onRails.Contains(go))
+        {
+            onRails.Remove(go);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
+        //To keep track of whether the train is in contact with any rails
+        GameObject go = col.gameObject;
+        if (!onRails.Contains(go))
+        {
+            onRails.Add(go);
+        }
+
         string name = col.name;
         tile = col.gameObject.transform.position;
         Direction a = going;
-        Direction b = going;
+        Direction b = inverse(going);
         if (name.Contains("LR")) {
             a = Direction.Left;
             b = Direction.Right;
@@ -88,6 +133,12 @@ public class TrainMovement : MonoBehaviour
         } else if (name.Contains("Obstacle"))
         {
             crash();
+        } else if (name.Contains("Station"))
+        {
+            if (going == Direction.Right)
+            {
+                win();
+            }
         }
         if (going == inverse(a))
         {
@@ -100,7 +151,6 @@ public class TrainMovement : MonoBehaviour
         {
             crash();
         }
-            //TODO: crash if train derails
     }
 
     Direction inverse (Direction d) {
@@ -124,5 +174,12 @@ public class TrainMovement : MonoBehaviour
         //TODO: Crash animation
 
         SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+    }
+    void win()
+    {
+        going = Direction.Stop;
+        toGo = Direction.Stop;
+
+        SceneManager.LoadScene("Win", LoadSceneMode.Single);
     }
 }
